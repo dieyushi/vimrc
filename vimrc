@@ -81,6 +81,7 @@ let mapleader=","
 inoremap <F2> <ESC>
 nnoremap <F2> <ESC>
 vnoremap <F2> <ESC>
+map <silent> <F12> :!ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .<cr>
 
 "修改vim的正则表达
 nnoremap / /\v
@@ -177,6 +178,13 @@ let g:ycm_confirm_extra_conf=0
 Bundle 'fsouza/go.vim'
 "Bundle 'spiiph/vim-space'
 Bundle 'trailing-whitespace'
+Bundle 'taglist.vim'
+let Tlist_Show_One_File = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Close_On_Select = 1
+map <silent> <F9> :TlistToggle<cr>
 
 Bundle 'altercation/vim-colors-solarized'
 colorscheme solarized
@@ -211,7 +219,9 @@ let NERDTreeShowFiles=1
 let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.$','\~$']
 let NERDTreeShowLineNumbers=1
-let NERDTreeWinPos=1
+let NERDTreeWinPos=0
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd vimenter * if !argc() | NERDTree | endif
 
 Bundle 'The-NERD-Commenter'
 let NERDShutUp=1
